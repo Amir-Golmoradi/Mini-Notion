@@ -33,12 +33,11 @@ public class Task {
     private String subtitle;
 
     @NotNull
-    @Column(columnDefinition = "VARCHAR", length = 250)
+    @Column(nullable = false, length = 250)
     private String description;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "task_status default 'PENDING'")
     private TaskStatus status = TaskStatus.PENDING;
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
