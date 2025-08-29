@@ -1,7 +1,21 @@
 spring:
   profiles:
     active: dev
-
+  security:
+    user:
+      name: user
+      password: user
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${SUPPORT_EMAIL}
+    password: ${SUPPORT_EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 management:
   endpoints:
     web:
@@ -13,7 +27,13 @@ management:
     flyway:
       access: unrestricted
 
+logging:
+  level:
+    org.springframework: DEBUG
+    org.hibernate: DEBUG
+    org.flywaydb: DEBUG
+
 jwt:
-  secret: ${JWT_SECRET} # Use environment variable in production
-  expiration: ${JWT_EXPIRATION}
-  refresh-expiration: ${JWT_REFRESH_TOKEN}
+  jwt-secret: ${JWT_SECRET}
+  access-token-expiration-time: ${JWT_EXPIRATION}
+  refresh-token-expiration-time: ${JWT_REFRESH_TOKEN}
