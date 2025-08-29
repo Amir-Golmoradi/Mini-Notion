@@ -31,11 +31,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-devtools")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     // Database
     implementation("org.postgresql:postgresql")
-    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-core:10.20.0")
+    implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // JWT Dependencies
@@ -43,6 +44,9 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
+    // Swagger
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
 
     // Lombok
     compileOnly("org.projectlombok:lombok")
