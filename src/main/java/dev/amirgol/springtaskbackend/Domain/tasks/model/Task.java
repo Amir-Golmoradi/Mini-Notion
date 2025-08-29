@@ -4,8 +4,10 @@ import dev.amirgol.springtaskbackend.Domain.category.model.Category;
 import dev.amirgol.springtaskbackend.Domain.tasks.enums.TaskStatus;
 import dev.amirgol.springtaskbackend.Domain.user.model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -25,14 +27,18 @@ public class Task {
     private short id;
 
     @NotNull
+    @Size(min = 4, max = 250)
     @Column(nullable = false, length = 150)
+    @NotBlank(message = "Title is required")
     private String title;
 
     @NotNull
+    @Size(min = 4, max = 250)
     @Column(nullable = false, length = 150)
     private String subtitle;
 
     @NotNull
+    @Size(max = 250)
     @Column(nullable = false, length = 250)
     private String description;
 
@@ -65,5 +71,4 @@ public class Task {
     public void onUpdate() {
         updatedAt = OffsetDateTime.now();
     }
-
 }
