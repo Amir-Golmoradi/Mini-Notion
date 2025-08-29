@@ -1,17 +1,23 @@
 package dev.amirgol.springtaskbackend.Application.tasks.dto;
 
 import dev.amirgol.springtaskbackend.Domain.tasks.enums.TaskStatus;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.jetbrains.annotations.NotNull;
 
 public record TaskDto(
         short id,
-        @NotNull @Size(max = 150)
+        @NotNull
+        @Size(min = 4, max = 250)
+        @NotBlank(message = "Title is required")
         String title,
-        @NotNull @Size(max = 150)
+        @NotNull
+        @Size(min = 4, max = 250)
         String subtitle,
-        @NotNull @Size(max = 250)
+        @NotNull
+        @Size(max = 250)
         String description,
+        @NotNull
         TaskStatus status
 ) {
 }
