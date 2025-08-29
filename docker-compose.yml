@@ -1,8 +1,8 @@
 services:
   # Development PostgreSQL
   postgres_dev:
-    image: postgres:15
-    container_name: spring_task_postgres_dev
+    image: postgres:latest
+    container_name: postgres_dev
     environment:
       POSTGRES_DB: ${DEV_DB_NAME}
       POSTGRES_USER: ${DEV_DB_USER}
@@ -16,7 +16,7 @@ services:
 
   # Test PostgreSQL
   postgres_test:
-    image: postgres:15
+    image: postgres:latest
     container_name: spring_task_postgres_test
     environment:
       POSTGRES_DB: ${TEST_DB_NAME}
@@ -31,7 +31,7 @@ services:
 
   # Production PostgreSQL
   postgres_prod:
-    image: postgres:15
+    image: postgres:latest
     container_name: spring_task_postgres_prod
     environment:
       POSTGRES_DB: ${PROD_DB_NAME}
@@ -52,3 +52,4 @@ volumes:
 networks:
   spring_task_net:
     driver: bridge
+
