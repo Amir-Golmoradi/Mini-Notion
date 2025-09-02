@@ -32,19 +32,19 @@ public class UserController {
         return ResponseEntity.ok(pager.orElse(Page.empty()));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<UserResponseDto> findUserById(@PathVariable Short id) {
         var userResponseDto = userService.findUserById(id);
         return ResponseEntity.ok(userResponseDto);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<UserResponseDto> findUserByEmail(@PathVariable String email) {
         var userResponseDto = userService.findUserByEmail(email);
         return ResponseEntity.ok(userResponseDto);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<UserResponseDto> findUserByName(@PathVariable String name) {
         var userResponseDto = userService.findUserByName(name);
         return ResponseEntity.ok(userResponseDto);
@@ -56,7 +56,7 @@ public class UserController {
         return ResponseEntity.ok(userResponseDto);
     }
 
-    @PutMapping("/{email}")
+    @PutMapping("/email/{email}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable String email, @RequestBody UserRequestDto userRequestDto) {
         var userResponseDto = userService.editUser(email, userRequestDto);
         return ResponseEntity.ok(userResponseDto);
