@@ -1,14 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${TEST_DB_HOST}:${TEST_DB_PORT}/${TEST_DB_NAME}
-    username: ${TEST_DB_USER}
-    password: ${TEST_DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
   jpa:
     hibernate:
-      ddl-auto: create-drop  # Reset DB after tests
-    show-sql: false
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:data-test.sql
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
