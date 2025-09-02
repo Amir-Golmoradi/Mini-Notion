@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static java.util.Objects.*;
+import static java.util.Objects.nonNull;
 
 @Slf4j
 @Service
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<Page<UserResponseDto>> findAllUsers(UserRequestDto requestDto, Pageable pageable) {
         log.debug("Finding all users ...");
-        Page<User> userPage = userRepository.getUsersByNameAndEmail(
+        Page<User> userPage = userRepository.findUsersByNameAndEmail(
                 requestDto.name(),
                 requestDto.email(),
                 pageable
@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findUserByEmail(String email) {
+        log.info("Finding user by email {}", email);
+
+        if (!userRepository.existsByEmail(email)) {
+            throw new ResourceNotFoundException("User with email " + email + " not found");
+        }
         return userRepository.findUsersByEmail(email)
                 .map(mapper)
                 .orElseThrow(() -> new ResourceNotFoundException("User with email " + email + " not found"));
@@ -56,6 +61,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findUserByName(String username) {
+        if (!userRepository.existsByName(username)) {
+            throw new ResourceNotFoundException("User with name " + username + " not found");
+        }
         return userRepository.findUsersByName(username)
                 .map(mapper)
                 .orElseThrow(() -> new ResourceNotFoundException("User with name " + username + " not found"));
@@ -91,7 +99,7 @@ public class UserServiceImpl implements UserService {
         return mapper.apply(savedUser);
     }
 
-   // ======================= HELPER METHODS =======================
+    // ======================= HELPER METHODS =======================
     private User buildUserFromRequest(UserRequestDto requestDto) {
         User user = new User();
         user.setName(requestDto.name());
