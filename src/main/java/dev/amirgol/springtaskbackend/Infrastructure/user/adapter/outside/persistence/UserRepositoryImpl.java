@@ -18,8 +18,8 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserDtoMapper mapper;
 
     @Override
-    public Page<User> getUsersByNameAndEmail(String name, String email, Pageable pageable) {
-        return jpaRepository.findByNameAndEmail(name, email, pageable);
+    public Page<User> findUsersByNameAndEmail(String name, String email, Pageable pageable) {
+        return jpaRepository.findUsersByNameAndEmail(name, email, pageable);
     }
 
     @Override
@@ -39,21 +39,21 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean existsByName(String name) {
-        return jpaRepository.existsUserByName(name);
+        return jpaRepository.existsByName(name);
     }
 
     @Override
     public boolean existsByEmail(String email) {
-        return jpaRepository.existsUserByEmail(email);
+        return jpaRepository.existsByEmail(email);
     }
 
     @Override
     public Optional<User> findUsersByEmail(String email) {
-        return jpaRepository.findUsersByEmail(email);
+        return jpaRepository.findByEmail(email);
     }
 
     @Override
     public Optional<User> findUsersByName(String name) {
-        return jpaRepository.findUsersByName(name);
+        return jpaRepository.findByName(name);
     }
 }
