@@ -1,4 +1,7 @@
 spring:
+  graphql:
+    graphiql:
+      enabled: true
   profiles:
     active: dev
   security:
