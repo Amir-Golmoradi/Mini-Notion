@@ -1,5 +1,6 @@
 package dev.amirgol.springtaskbackend.Unit.Infrastructure.user;
 
+import dev.amirgol.springtaskbackend.Application.user.dto.request.UserRequestDto;
 import dev.amirgol.springtaskbackend.Application.user.dto.response.UserResponseDto;
 import dev.amirgol.springtaskbackend.Application.user.port.inside.UserService;
 import dev.amirgol.springtaskbackend.Infrastructure.user.adapter.inside.rest_api.UserController;
@@ -25,7 +26,7 @@ public class UserRestAPITest {
     private UserService userService;
 
     @Test
-    void shouldReturnUserByEmail() throws Exception {
+    void shouldFindUserByEmail() throws Exception {
         String email = "lucyhale@gmail.com";
         // given
         var user = UserResponseDto
@@ -43,7 +44,7 @@ public class UserRestAPITest {
     }
 
     @Test
-    void shouldReturnUserByName() throws Exception {
+    void shouldFindUserByName() throws Exception {
         String name = "Lucy Hale";
 
         var user = UserResponseDto
@@ -57,6 +58,53 @@ public class UserRestAPITest {
                 )
                 .andExpect(status().isOk()
                 );
+
+    }
+
+    @Test
+    void shouldRegisterNewUser() throws Exception {
+        var request = UserRequestDto
+                .builder()
+                .name("Taylor Swift")
+                .email("taylorswift@gmail.com")
+                .passwordHash("swifty123456")
+                .build();
+
+        var response = UserResponseDto
+                .builder()
+                .name("Taylor Swift")
+                .email("taylorswift@gmail.com")
+                .build();
+
+        BDDMockito.given(userService.registerUser(request)).willReturn(response);
+
+        mockMvc.perform(
+                        get(BASE_URL))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldUpdateCurrentUser() throws Exception {
+        String name = "Taylor Swift";
+        String email = "taylorswift@gmail.com";
+        String passwordHash = "swifty123456";
+        var request = UserRequestDto
+                .builder()
+                .name(name)
+                .email(email)
+                .passwordHash(passwordHash)
+                .build();
+
+        var response = UserResponseDto
+                .builder()
+                .name("Adonis Creed")
+                .email("adonis_creed_boxing@gmail.com")
+                .build();
+
+        BDDMockito.given(userService.editUser(email, request)).willReturn(response);
+
+        mockMvc.perform(get(BASE_URL + "/email/{email}", email))
+                .andExpect(status().isOk());
 
     }
 }
