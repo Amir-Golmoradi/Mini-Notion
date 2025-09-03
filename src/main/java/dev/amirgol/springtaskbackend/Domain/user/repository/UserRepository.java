@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface UserRepository {
-    Page<User> getUsersByNameAndEmail(@NotBlank String name, @Email String email, Pageable pageable);
+    Page<User> findUsersByNameAndEmail(@NotBlank String name, @Email String email, Pageable pageable);
 
     Optional<User> findUserById(Short id);
 
