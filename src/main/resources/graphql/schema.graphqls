@@ -1,0 +1,44 @@
+# Query type defines the entry points for fetching data in GraphQL.
+type Query {
+    findAllUsers(page: Int = 0, size: Int = 10): UserPage!
+    findUserById(id: ID!): User
+    findUserByEmail(email: String!): User
+    findUserByName(name: String!): User
+}
+
+# Mutation type defines operations that MODIFY DATA in the GraphQL API.
+type Mutation {
+    createUser(input: UserInput!): User!
+    editUser(email: String!, input: UserInput!): User!
+    deleteUser(email: String!): Boolean!
+}
+
+# PageInfo type provides metadata for paginated results.
+type PageInfo {
+    totalElements: Int!
+    totalPages: Int!
+    pageNumber: Int!
+    pageSize: Int!
+}
+
+# UserPage type wraps paginated results for findAllUsers query.
+type UserPage {
+    content: [User!]!
+    pageInfo: PageInfo!
+}
+
+# Input type for user creation and updates.
+# Maps directly to UserRequestDto record
+input UserInput {
+    name: String!
+    email: String!
+    passwordHash: String!
+}
+
+# User type representing the user entity
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    passwordHash: String!
+}
