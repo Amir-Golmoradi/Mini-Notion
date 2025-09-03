@@ -7,7 +7,6 @@ import lombok.*;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(name = "unique_email", columnNames = "email")})
 
-public class User  {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Short id;  // SMALL SERIAL
@@ -37,16 +36,18 @@ public class User  {
     @Column(nullable = false, length = 100)
     private String passwordHash;
 
+    @Builder.Default
     @Column(nullable = false, updatable = false)
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
+    @Builder.Default
     @Column(nullable = false)
     private OffsetDateTime updatedAt = OffsetDateTime.now();
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
