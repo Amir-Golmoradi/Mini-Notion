@@ -1,7 +1,4 @@
 spring:
-  graphql:
-    graphiql:
-      enabled: true
   profiles:
     active: dev
   security:
@@ -19,6 +16,14 @@ spring:
           auth: true
           starttls:
             enable: true
+
+# DGS should be at root level, NOT under spring
+dgs:
+  graphql:
+    graphiql:
+      enabled: true
+    path: /graphql
+
 management:
   endpoints:
     web:
@@ -35,6 +40,8 @@ logging:
     org.springframework: DEBUG
     org.hibernate: DEBUG
     org.flywaydb: DEBUG
+    # Add DGS logging to see GraphQL errors
+    com.netflix.graphql.dgs: DEBUG
 
 jwt:
   jwt-secret: ${JWT_SECRET}
