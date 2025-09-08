@@ -3,6 +3,7 @@ package dev.amirgol.springtaskbackend.core.exception;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
+import io.minio.errors.MinioException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,19 +65,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
-    /**
-     * Handle authentication failures
-     */
-//    @ExceptionHandler({BadCredentialsException.class, UsernameNotFoundException.class})
-//    public ResponseEntity<Map<String, Object>> handleAuthenticationExceptions(Exception ex) {
-//        Map<String, Object> response = new HashMap<>();
-//        response.put("error", "Authentication failed");
-//        response.put("message", "Invalid credentials");
-//        response.put("timestamp", System.currentTimeMillis());
-//
-//        logger.error("Authentication error: {}", ex.getMessage());
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-//    }
+    @ExceptionHandler({MinioException.class, StorageException.class, IOException.class})
+    public ResponseEntity<Map<String, Object>> handleMinioExceptions(Exception ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("error", "Storage error");
+        response.put("message", ex.getMessage());
+        response.put("timestamp", System.currentTimeMillis());
+        logger.error("Storage error: {}", ex.getMessage(), ex);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
 
     /**
      * Handle general runtime exceptions
