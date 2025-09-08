@@ -34,13 +34,17 @@ management:
       show-details: NEVER
     flyway:
       access: unrestricted
+minio:
+  endpoint: http://localhost:9000
+  access-key: ${MINIO_ROOT_USER}
+  secret-key: ${MINIO_ROOT_PASSWORD}
+  bucket: attachments
 
 logging:
   level:
     org.springframework: DEBUG
     org.hibernate: DEBUG
     org.flywaydb: DEBUG
-    # Add DGS logging to see GraphQL errors
     com.netflix.graphql.dgs: DEBUG
 
 jwt:
