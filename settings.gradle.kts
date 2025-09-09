@@ -1,1 +1,1 @@
-rootProject.name = "spring-task-backend"
+rootProject.name = "mini-notion"
