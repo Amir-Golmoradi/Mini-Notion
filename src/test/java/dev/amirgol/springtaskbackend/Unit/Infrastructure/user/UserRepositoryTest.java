@@ -1,7 +1,7 @@
 package dev.amirgol.springtaskbackend.Unit.Infrastructure.user;
 
-import dev.amirgol.springtaskbackend.Domain.user.model.User;
-import dev.amirgol.springtaskbackend.Infrastructure.user.adapter.outside.persistence.UserJpaRepository;
+import dev.amirgol.springtaskbackend.user.domain.model.User;
+import dev.amirgol.springtaskbackend.user.infrastructure.adapter.outside.persistence.UserJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
