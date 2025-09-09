@@ -7,7 +7,7 @@ plugins {
 
 group = "dev.amirgol"
 version = "1.0.0"
-description = "spring-task-backend"
+description = "mini-notion"
 
 java {
     toolchain {
@@ -27,6 +27,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-mail")
+
+    // Spring Modulith dependencies
+    implementation("org.springframework.modulith:spring-modulith-starter-core")
+
+    // MinIO SDK - Bucket Storage
+    implementation("io.minio:minio:8.5.17")
+
 
     // Database
     implementation("org.postgresql:postgresql")
@@ -54,15 +61,16 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     // Test
+    runtimeOnly("com.h2database:h2")
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.springframework.graphql:spring-graphql-test") // only for testing GraphQL endpoints
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.springframework.graphql:spring-graphql-test") // only for testing GraphQL endpoints
-    runtimeOnly("com.h2database:h2")
+    testImplementation("org.springframework.modulith:spring-modulith-starter-test")
 }
 
 tasks.withType<Test> {
@@ -72,5 +80,6 @@ tasks.withType<Test> {
 dependencyManagement {
     imports {
         mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.1.3")
+        mavenBom("org.springframework.modulith:spring-modulith-bom:1.1.0")
     }
 }
