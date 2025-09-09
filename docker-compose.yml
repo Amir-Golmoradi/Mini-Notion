@@ -14,6 +14,31 @@ services:
     networks:
       - spring_task_net
 
+  minio:
+    image: minio/minio:latest
+    container_name: minio_bucket
+    restart: unless-stopped
+    volumes:
+      - minio_data:/data
+    environment:
+      TZ: Asia/Tehran
+      LANG: en_US.UTF-8
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    command: server /data --console-address ":9001"
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    ports:
+      - "7000:9000" # API port
+      - "7001:9001" # Console port
+    networks:
+      - spring_task_net
+
   # Production PostgreSQL
   postgres_prod:
     image: postgres:latest
@@ -33,8 +58,7 @@ volumes:
   postgres_dev_data:
   postgres_test_data:
   postgres_prod_data:
-
+  minio_data:
 networks:
   spring_task_net:
     driver: bridge
-
