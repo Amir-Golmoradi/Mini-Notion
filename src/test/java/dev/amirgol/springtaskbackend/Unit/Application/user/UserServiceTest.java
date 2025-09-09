@@ -1,10 +1,9 @@
 package dev.amirgol.springtaskbackend.Unit.Application.user;
 
-import dev.amirgol.springtaskbackend.Application.user.dto.request.UserRequestDto;
-import dev.amirgol.springtaskbackend.Application.user.port.inside.UserService;
-import dev.amirgol.springtaskbackend.Application.user.port.outside.UserServiceImpl;
-import dev.amirgol.springtaskbackend.Domain.user.model.User;
-import dev.amirgol.springtaskbackend.Domain.user.repository.UserRepository;
+import dev.amirgol.springtaskbackend.user.application.dto.request.UserRequestDto;
+import dev.amirgol.springtaskbackend.user.application.port.outside.UserServiceImpl;
+import dev.amirgol.springtaskbackend.user.domain.model.User;
+import dev.amirgol.springtaskbackend.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
