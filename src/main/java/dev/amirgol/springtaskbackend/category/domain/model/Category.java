@@ -1,7 +1,7 @@
-package dev.amirgol.springtaskbackend.Domain.category.model;
+package dev.amirgol.springtaskbackend.category.domain.model;
 
-import dev.amirgol.springtaskbackend.Domain.tasks.model.Task;
-import dev.amirgol.springtaskbackend.Domain.user.model.User;
+import dev.amirgol.springtaskbackend.task.domain.model.Task;
+import dev.amirgol.springtaskbackend.user.domain.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,11 +25,11 @@ public class Category {
     @Column(nullable = false, length = 50)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Task> tasks = new ArrayList<>();
+//    @ManyToMany(mappedBy = "categories")
+//    private List<Task> tasks = new ArrayList<>();
 
 }
