@@ -38,3 +38,7 @@ out/
 
 ### Env ###
 .env
+
+### MINIO ###
+minio/data/.minio.sys/
+
