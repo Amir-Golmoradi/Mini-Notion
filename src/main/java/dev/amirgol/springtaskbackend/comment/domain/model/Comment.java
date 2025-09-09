@@ -1,7 +1,7 @@
-package dev.amirgol.springtaskbackend.Domain.comments.model;
+package dev.amirgol.springtaskbackend.comment.domain.model;
 
-import dev.amirgol.springtaskbackend.Domain.tasks.model.Task;
-import dev.amirgol.springtaskbackend.Domain.user.model.User;
+import dev.amirgol.springtaskbackend.task.domain.model.Task;
+import dev.amirgol.springtaskbackend.user.domain.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,13 +24,13 @@ public class Comment {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "task_id", nullable = false)
-    private Task task;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "task_id", nullable = false)
+//    private Task task;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    private User user;
 
     @Column(nullable = false, updatable = false)
     private OffsetDateTime createdAt;
