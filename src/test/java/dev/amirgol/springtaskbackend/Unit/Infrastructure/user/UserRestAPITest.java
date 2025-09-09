@@ -1,9 +1,9 @@
 package dev.amirgol.springtaskbackend.Unit.Infrastructure.user;
 
-import dev.amirgol.springtaskbackend.Application.user.dto.request.UserRequestDto;
-import dev.amirgol.springtaskbackend.Application.user.dto.response.UserResponseDto;
-import dev.amirgol.springtaskbackend.Application.user.port.inside.UserService;
-import dev.amirgol.springtaskbackend.Infrastructure.user.adapter.inside.rest_api.UserController;
+import dev.amirgol.springtaskbackend.user.application.dto.request.UserRequestDto;
+import dev.amirgol.springtaskbackend.user.application.dto.response.UserResponseDto;
+import dev.amirgol.springtaskbackend.user.application.port.inside.UserService;
+import dev.amirgol.springtaskbackend.user.infrastructure.adapter.inside.rest_api.UserRestController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(UserController.class)
+@WebMvcTest(UserRestController.class)
 @DisplayName("User Rest API Controller Unit Test")
 public class UserRestAPITest {
 
