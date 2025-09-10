@@ -1,80 +1,128 @@
-# TaskMaster Backend
+# 🚀 Mini Notion Backend
 
-A Spring Boot backend project for managing Tasks, Categories, Comments, and Attachments, integrated with a PostgreSQL database. The project features a modular architecture and includes a `docker-compose` setup for easy deployment.
+A **production-ready Spring Boot backend** inspired by Notion’s building blocks — **Tasks, Categories, Comments, Users, and Attachments**.
+It runs on **PostgreSQL via Docker**, follows a **modular domain-driven architecture**, and is designed to integrate seamlessly with a **React frontend**.
 
-## Prerequisites
+This project is not just a demo — it’s a **blueprint for scalable Java backends** that you can fork, extend, and deploy today.
 
-Before running the project, ensure you have:
+---
 
-- [Java 17 or higher](https://adoptopenjdk.net/)
-- [Gradle 8 or higher](https://gradle.org/install/) (not required if using the Gradle Wrapper)
-- [Docker and Docker Compose](https://docs.docker.com/compose/install/)
-- An IDE like IntelliJ IDEA or VS Code (optional but recommended)
+## ✨ Features
 
-## 1. Set Up the Database with Docker
+✅ Modular architecture (`task`, `comment`, `category`, `attachment`, `user`)
+✅ Clean separation of **Domain, Application, Infrastructure**
+✅ PostgreSQL with `docker-compose`
+✅ Gradle build system (wrapper included)
+✅ Config profiles: `dev`, `test`, `prod`
+✅ **React-ready REST API** (CORS configured)
+✅ Attachment module pluggable with **S3 / MinIO**
 
-The project includes a `docker-compose.yml` file in the root directory to start a PostgreSQL database.
+---
 
-1. Open a terminal and navigate to the project directory:
+## 📂 Project Structure
 
-   ```bash
-   cd path/to/my-project-repo
-   ```
+```text
+src/main/java/dev/amirgol/springtaskbackend/
+├── attachment/      # File uploads & storage (S3/MinIO ready)
+├── category/        # Task categories
+├── comment/         # Commenting system for tasks
+├── core/            # Exceptions, core utilities
+├── shared/          # Shared components, cross-cutting concerns
+├── task/            # Task management (CRUD, deadlines, assignment)
+├── user/            # User management (auth-ready)
+└── App.java         # Application entry point
+```
 
-2. Run the following command to start the database:
+**Inside each module**:
 
-   ```bash
-   docker-compose up -d
-   ```
+* **Domain** → Entities, rules, value objects
+* **Application** → Use cases, DTOs, ports
+* **Infrastructure** → Persistence, adapters, config
 
-   > This starts the PostgreSQL database and prepares it for the project.
+---
 
-3. Verify the database is running:
+## 🛠 Prerequisites
 
-   ```bash
-   docker-compose ps
-   ```
+* [Java 17+](https://adoptium.net/)
+* [Gradle 8+](https://gradle.org/install/) (or use wrapper)
+* [Docker & Docker Compose](https://docs.docker.com/compose/install/)
+* [Node.js + npm](https://nodejs.org/) (for React frontend)
 
-## 2. Run the Backend
+---
 
-1. Navigate to the backend directory:
+## 🐘 Start PostgreSQL
 
-   ```bash
-   cd backend
-   ```
+```bash
+docker-compose up -d
+docker-compose ps
+```
 
-2. Start the project using Gradle:
+Database credentials match `application.yml` and `docker-compose.yml`.
 
-   ```bash
-   ./gradlew bootRun
-   ```
+---
 
-   > On Windows, use `gradlew.bat bootRun` instead.
+## ▶️ Run the Backend
 
-3. The backend will run on **port 8080**.
+```bash
+./gradlew bootRun
+```
 
-    - Test it with a browser or Postman:
+On Windows:
 
-      ```
-      http://localhost:8080/api/tasks
-      ```
+```bash
+gradlew.bat bootRun
+```
 
-## 3. Configuration Files
+Backend runs at:
 
-- `application.yml`: General Spring Boot configuration
-- `application-dev.yml`: Development environment
-- `application-prod.yml`: Production environment
-- `application-test.yml`: Test environment
+```http
+http://localhost:8080
+```
 
-> The database is configured to connect to the Dockerized PostgreSQL instance by default, with credentials defined in `docker-compose.yml`.
+Try hitting:
 
-## 4. Run the Frontend (Once Available)
+```http
+http://localhost:8080/api/tasks
+```
 
-1. Navigate to the frontend directory:
+---
 
-   ```bash
-   cd frontend
-   ```
+## ⚙️ Config Profiles
+
+* `application.yml` → Base config
+* `application-dev.yml` → Development
+* `application-test.yml` → Testing
+* `application-prod.yml` → Production
+
+Switch with:
+
+```bash
+./gradlew bootRun --args='--spring.profiles.active=dev'
+```
+
+---
+
+## 📦 Build & Test
+
+Build JAR:
+
+```bash
+./gradlew build
+```
+
+Run tests:
+
+```bash
+./gradlew test
+```
+
+---
+
+## 🌐 React Frontend
+
+The backend is designed to be consumed by a React app.
+
+1. Clone the React frontend (coming soon in `/frontend`).
 
 2. Install dependencies:
 
@@ -82,59 +130,42 @@ The project includes a `docker-compose.yml` file in the root directory to start 
    npm install
    ```
 
-3. Start the Angular project:
+3. Start React:
 
    ```bash
-   ng serve
+   npm start
    ```
 
-    - The frontend will run on **port 4200**:
+React runs on **[http://localhost:3000](http://localhost:3000)** and communicates with the backend on **[http://localhost:8080](http://localhost:8080)**.
 
-      ```
-      http://localhost:4200
-      ```
+CORS is enabled for local development by default.
 
-## 5. Project Structure
+---
 
-```
-src/main/java/dev/amirgol/springtaskbackend/
-├── Application/        # DTOs, Use Cases, and Ports
-├── Domain/             # Entities and Models
-├── Infrastructure/     # Adapters and Configuration
-```
+## 🚧 Roadmap
 
-- **Domain**: Contains core models (Task, User, Category, Comment, Attachment)
-- **Application**: Manages use cases and services
-- **Infrastructure**: Handles database, repositories, and project configurations
+* 🔒 JWT authentication + refresh tokens
+* 📎 File attachment cloud storage integration
+* 📡 GraphQL API option (Netflix DGS)
+* 📊 Observability with Prometheus + Grafana
+* ☁️ Docker + Kubernetes deployment
 
-## 6. Tips
+---
 
-- **Database Changes**: If you modify the database, reset the Docker Compose setup:
+## 🤝 Contributing
 
-  ```bash
-  docker-compose down -v
-  docker-compose up -d
-  ```
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/amazing`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push (`git push origin feature/amazing`)
+5. Open a Pull Request
 
-- **Build Production JAR**: Create a production-ready JAR file for the backend:
+---
 
-  ```bash
-  ./gradlew build
-  ```
+## 📜 License
 
-- **Run Tests**: Execute automated tests:
+MIT — open, free, and reusable.
 
-  ```bash
-  ./gradlew test
-  ```
+---
 
-## Getting Started
-
-This README is designed to help beginners and experienced developers alike set up and run the database, backend, and frontend with minimal effort. Follow the steps above to get started.
-
-
-
-### Next Steps
-1. **Copy the README**: Save the above content as `README.md` in the root of your GitHub repository.
-2. **Push to GitHub**: Ensure the file is committed and pushed to your repository’s main branch.
-3. **Optional Enhancements**: If you want to add visuals (e.g., screenshots of the running app or setup steps) or additional sections (e.g., API documentation, contribution guidelines), let me know, and I can help you expand the README with those details.
+🔥 With **Mini Notion Backend**, you don’t just run a project — you get a **reference architecture for scalable React + Spring Boot apps**.
