@@ -1,6 +1,6 @@
 @ApplicationModule(
         displayName = "Attachments",
-        allowedDependencies = "core::Exceptions"
+        allowedDependencies = {"core::Exceptions", "core::Constants", "core:Common"}
 )
 package dev.amirgol.springtaskbackend.attachment;
 
