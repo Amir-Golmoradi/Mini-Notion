@@ -1,4 +1,4 @@
 @NamedInterface
-package dev.amirgol.springtaskbackend.attachment.infrastructure.adapter.outside;
+package dev.amirgol.springtaskbackend.attachment.infrastructure.adapter.inside;
 
 import org.springframework.modulith.NamedInterface;
