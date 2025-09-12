@@ -1,4 +1,4 @@
-# TaskMaster Backend
+# Mini Notion Backend
 
 A Spring Boot backend project for managing Tasks, Categories, Comments, and Attachments, integrated with a PostgreSQL database. The project features a modular architecture and includes a `docker-compose` setup for easy deployment.
 
@@ -56,7 +56,7 @@ The project includes a `docker-compose.yml` file in the root directory to start 
     - Test it with a browser or Postman:
 
       ```
-      http://localhost:8080/api/tasks
+      http://localhost:8080/api/v1/tasks
       ```
 
 ## 3. Configuration Files
