@@ -1,4 +1,4 @@
-package dev.amirgol.springtaskbackend.attachment.infrastructure.adapter.outside;
+package dev.amirgol.springtaskbackend.attachment.infrastructure.adapter.inside;
 
 import dev.amirgol.springtaskbackend.attachment.application.port.inside.AttachmentMetadata;
 import dev.amirgol.springtaskbackend.attachment.application.port.outside.AttachmentPort;
